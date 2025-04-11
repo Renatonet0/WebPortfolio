@@ -36,7 +36,7 @@ const App = () => {
       gsap.to(imageRight, {
         x: cursorPos.x,
         y: cursorPos.y,
-        duration: 0.5, 
+        duration: 1, 
         ease: "power2.out",
       });
     }
