@@ -17,9 +17,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// aaaaaaaaaaaaaaaaaaaaa
-// aaaaaaaaaaaaaaaaaaaaa
-
 const App = () => {
   const sectionsRef = useRef([]);
   const scrollTriggersRef = useRef([]);
@@ -39,7 +36,7 @@ const App = () => {
       gsap.to(imageRight, {
         x: cursorPos.x,
         y: cursorPos.y,
-        duration: 0.5, 
+        duration: 1, 
         ease: "power2.out",
       });
     }
