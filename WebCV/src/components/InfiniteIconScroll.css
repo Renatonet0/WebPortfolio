@@ -1,0 +1,84 @@
+.icon-scroll-container {
+  width: 100%;
+  
+  position: relative;
+  margin: 2rem 0;
+}
+
+.icon-scroll-container::before,
+.icon-scroll-container::after {
+  content: "";
+  width: 40%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.icon-scroll-container::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(12,12,12,1) 0%, 100%);
+}
+
+.icon-scroll-container::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(12,12,12,1) 0%, 100%);
+}
+
+.icon-scroll-track {
+  display: flex;
+  animation: scrollAnimation linear infinite;
+  will-change: transform;
+  gap: 2vw
+}
+
+.icon-item {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1vw;
+}
+
+/* Tamanhos responsivos dos ícones */
+.icon-svg, .icon-img {
+  opacity: 40%;
+  width: 3vw; /* Mín:24px, Ideal:5% da largura da tela, Máx:60px */
+  height: 3vw;
+  aspect-ratio: 1/1; /* Mantém proporção quadrada */
+  object-fit: contain;
+  transition: transform 0.3s ease; /* Efeito hover opcional */
+}
+
+/* Efeito hover (opcional) */
+.icon-item:hover .icon-svg, 
+.icon-item:hover .icon-img {
+  transform: scale(1.1);
+}
+
+/* Ajustes para telas pequenas */
+@media (max-width: 768px) {
+  .icon-scroll-container::before,
+  .icon-scroll-container::after {
+    width: 40px;
+  }
+  
+  .icon-item {
+    padding: 0
+  }
+  
+  .icon-svg, .icon-img {
+    width: clamp(30px, 8vw, 40px);
+  }
+}
+
+/* Ajuste da animação */
+@keyframes scrollAnimation {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-80% / var(--item-count) * var(--item-count)));
+  }
+}

@@ -1,0 +1,102 @@
+:root {
+    --box-color-top-start: #B4CED9;
+    --box-color-top-end: #FF5733; 
+    --box-color-face-start: #5697BF;
+    --box-color-face-end: #C70039;
+    --box-color-side-start: #566D8C;
+    --box-color-side-end: #900C3F;
+  
+    --box-width: 200px;
+    --box-height: 10px;
+    --box-depth: 200px;
+    --box-spacing: 0px;
+    --animation-duration: 3s;
+    --animation-delay: 0.1s;
+}
+  
+.canvas {
+    z-index: 1;
+    position: relative;
+    transform: rotateX(45deg) rotateZ(45deg);
+    transform-style: preserve-3d;
+    font-size: 0;
+}
+  
+.group {
+    display: inline-block;
+    margin-right: var(--box-spacing);
+    transform-style: preserve-3d;
+}
+  
+.box {
+    position: relative;
+    width: var(--box-width);
+    height: var(--box-depth);
+    background-color: var(--box-color-top);
+    transform-style: preserve-3d;
+    margin-bottom: var(--box-spacing);
+    animation: wave var(--animation-duration) infinite cubic-bezier(0.74, 0.14, 0.18, 0.91),
+               colorShift 5s infinite alternate;
+    animation-delay: calc(var(--scale, 1) * var(--animation-delay));
+    animation-play-state: var(--animation-state, running); /* Controla o estado da animação */
+  }
+  
+.box:before,
+.box:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transform-origin: 100% 100%;
+}
+  
+.box:before {
+    width: 100%;
+    height: calc(var(--box-height) * var(--scale, 1));
+    background-color: var(--box-color-side-start);
+    transform: rotateX(90deg) translateZ(calc(var(--box-height) * var(--scale, 1) - var(--box-depth)));
+}
+  
+.box:after {
+    width: calc(var(--box-height) * var(--scale, 1));
+    height: 100%;
+    background-color: var(--box-color-face-start);
+    transform: rotateY(-90deg) translateZ(calc(var(--box-height) * var(--scale, 1) - var(--box-width)));
+}
+  
+@keyframes wave {
+    0% {
+        transform: translateZ(0);
+        background-color: var(--box-color-top-start);
+    }
+    50% {
+        transform: translateZ(calc(var(--scale, 1) * var(--box-height) * 2));
+        background-color: var(--box-color-top-end);
+    }
+    100% {
+        transform: translateZ(0);
+        background-color: var(--box-color-top-start);
+    }
+}
+
+@keyframes wave-colors {
+    0% {
+        background-color: var(--box-color-side-start);
+    }
+    50% {
+        background-color: var(--box-color-side-end);
+    }
+    100% {
+        background-color: var(--box-color-side-start);
+    }
+}
+
+/* Aplicando animação de cores para as outras faces */
+.box:before {
+    animation: wave-colors var(--animation-duration) infinite cubic-bezier(0.74, 0.14, 0.18, 0.91);
+}
+
+.box:after {
+    animation: wave-colors var(--animation-duration) infinite cubic-bezier(0.74, 0.14, 0.18, 0.91);
+}
