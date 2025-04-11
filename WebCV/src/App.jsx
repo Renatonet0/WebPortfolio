@@ -15,6 +15,8 @@ import Lenis from "@studio-freight/lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+// Teste git hub
+
 gsap.registerPlugin(ScrollTrigger);
 
 const App = () => {
